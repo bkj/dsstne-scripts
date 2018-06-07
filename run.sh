@@ -15,7 +15,7 @@ python prep.py --inpath data/ml-20m/ratings.csv --outpath data
 # --
 # Run
 
-export PATH="/home/bjohnson/software/amazon-dsstne/src/amazon/dsstne/bin/:$PATH"
+export PATH="./amazon-dsstne/src/amazon/dsstne/bin/:$PATH"
 
 generateNetCDF -d gl_input -i data/train.txt -o data/gl_input.nc -f data/features_input -s data/samples_input -c
 generateNetCDF -d gl_output -i data/train.txt -o data/gl_output.nc -f data/features_output -s data/samples_input -c
