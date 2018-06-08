@@ -17,30 +17,30 @@ python prep.py --inpath data/ml-20m/ratings.csv --outpath data
 
 export PATH="/home/bjohnson/software/amazon-dsstne/src/amazon/dsstne/bin/:$PATH"
 
-head -n 2000 data/train.txt > data/train-small.txt
-head -n 2000 data/test.txt > data/test-small.txt
+# head -n 2000 data/train.txt > data/train-small.txt
+# head -n 2000 data/test.txt > data/test-small.txt
 
-generateNetCDF -d gl_input -i data/train-small.txt -o data/gl_input.nc -f data/features_input -s data/samples_input -c
-generateNetCDF -d gl_output -i data/train-small.txt -o data/gl_output.nc -f data/features_output -s data/samples_input -c
+generateNetCDF -d gl_input -i data/train.txt -o data/gl_input.nc -f data/features_input -s data/samples_input -c
+generateNetCDF -d gl_output -i data/train.txt -o data/gl_output.nc -f data/features_output -s data/samples_input -c
 
 rm models/*
-train -b 64 -e 10 -n models/network.nc \
+train -b 1024 -e 20 -n models/network.nc \
     -d gl \
     -i data/gl_input.nc \
     -o data/gl_output.nc \
     -c config.json
 
-predict -b 2048 -k 10 -n initial_network.nc \
+predict -b 2048 -k 10 -n models/network.nc \
     -d gl \
     -i data/features_input \
     -o data/features_output \
-    -f data/train-small.txt \
-    -r data/train-small.txt \
+    -f data/train.txt \
+    -r data/train.txt \
     -s results/recs
 
 head results/recs
 
-python inspect-results.py data/test-small.txt results/recs
+python inspect-results.py data/test.txt results/recs
 
 # >>
 # 400, 1 epoch
