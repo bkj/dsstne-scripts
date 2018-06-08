@@ -6,6 +6,7 @@ sudo apt-get -y update
 
 sudo apt-get install -y gcc
 sudo apt-get install -y g++
+sudo apt-get install -y unzip
 sudo apt-get install -y libatlas-base-dev
 sudo apt-get install -y libopenmpi-dev
 sudo apt-get install -y libhdf5-dev
@@ -19,7 +20,6 @@ git clone https://github.com/amzn/amazon-dsstne
 cd amazon-dsstne
 
 wget https://github.com/NVlabs/cub/archive/1.5.2.zip
-sudo apt-get install -y unzip
 unzip 1.5.2.zip
 sudo cp -rf cub-1.5.2/cub/ /usr/local/include/
 
