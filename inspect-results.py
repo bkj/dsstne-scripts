@@ -29,9 +29,6 @@ if __name__ == "__main__":
     assert len(recs) == len(test)
     
     res = {}
-    for p in [1, 5, 10]:
-        res[p] = [len(test[k].intersection(v[:p])) / p for k,v in recs.items()]
-    
-    res = dict([(k, float(np.mean(v))) for k,v in res.items()])
-    
-    print(json.dumps(res))
+    for top_k in [1, 5, 10]:
+        precisions = [len(test[k].intersection(v[:top_k])) / top_k for k,v in recs.items()]
+        print('p@%0.2d -> %f' % (top_k, np.mean(precisions)))
