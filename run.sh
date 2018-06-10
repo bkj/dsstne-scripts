@@ -24,7 +24,7 @@ generateNetCDF -d gl_input -i data/train.txt -o data/gl_input.nc -f data/feature
 generateNetCDF -d gl_output -i data/train.txt -o data/gl_output.nc -f data/features_output -s data/samples_input -c
 
 rm models/*
-train -b 1024 -e 20 -n models/network.nc \
+train -b 1024 -e 50 -n models/network.nc \
     -d gl \
     -i data/gl_input.nc \
     -o data/gl_output.nc \
@@ -63,6 +63,41 @@ python inspect-results.py data/test.txt results/recs
 # p@05 -> 0.348272
 # p@10 -> 0.292293
 
+# 800, 10 epoch, bs=128
+# p@01 -> 0.510567
+# p@05 -> 0.403447
+# p@10 -> 0.338300
+
+# 400, 10 epoch, bs=128
+# p@01 -> 0.484024
+# p@05 -> 0.380580
+# p@10 -> 0.318329
+
+# 400, 50 epoch, bs=128
+# p@01 -> 0.473547
+# p@05 -> 0.372754
+# p@10 -> 0.312204
+
+# 400, 50 epoch, bs=256
+# p@01 -> 0.478717
+# p@05 -> 0.377697
+# p@10 -> 0.317628
+
+# 400, 50 epoch, bs=1024
+# p@01 -> 0.490400
+# p@05 -> 0.387940
+# p@10 -> 0.328886
+
+# 800, 50 epoch, bs=1024
+# p@01 -> 0.529767
+# p@05 -> 0.419045
+# p@10 -> 0.352933
+
+# 800, 50 epoch, bs=1024, nohidden
+# p@01 -> 0.416180
+# p@05 -> 0.328593
+# p@10 -> 0.281058
+
 # <<
 
 
@@ -71,7 +106,7 @@ python inspect-results.py data/test.txt results/recs
 # p@05 -> 0.415397
 # p@10 -> 0.350998
 
-# 800d
+# 800d (50e?)
 # p@01 -> 0.526164
 # p@05 -> 0.419376
 # p@10 -> 0.353257
