@@ -12,12 +12,11 @@ CUDA_VISIBLE_DEVICES=4 python main.py --emb-dim 400 --sortish > results/py-400-s
 CUDA_VISIBLE_DEVICES=1 python main.py --max-obs 1280 \
     --emb-dim 400 --eval-interval 1 --epochs 10 --no-verbose
 
-CUDA_VISIBLE_DEVICES=7 python main.py \
+
+CUDA_VISIBLE_DEVICES=1 python main.py \
     --emb-dim 800 \
     --eval-interval 1 \
     --epochs 10 \
-    --batch-size 256 \
-    --model 2 \
-    --weight-decay 0.00001 | tee results/tmp4
+    --batch-size 256 | tee results/tmp5
 
 
